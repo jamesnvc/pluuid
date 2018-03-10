@@ -1,8 +1,8 @@
-# pluuid
+# UUID for Prolog
 
 This library provides predicates for dealing with UUIDs in Prolog.
 
-It can be installed in SWI-Prolog using `pack_install(pluuid).`
+It can be installed in SWI-Prolog using `pack_install(uuid).`
 
 ## Examples
 
