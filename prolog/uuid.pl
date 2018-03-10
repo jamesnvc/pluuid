@@ -20,7 +20,7 @@ unsigned64_signed64(Un, Si) :-
     Un is 0xffff_ffff_ffff_ffff - Inv.
 unsigned64_signed64(Un, Un).
 
-%% random_uuid(-UUID) is det
+%! random_uuid(-UUID) is det
 % UUID is a random version-4 UUID, represented as `uuid(High64, Low64)`.
 random_uuid(uuid(Hi, Lo)) :-
     crypto_n_random_bytes(8, HiBytes),
@@ -37,9 +37,9 @@ random_uuid(uuid(Hi, Lo)) :-
     LoUn is Lo_ \/ (1 << (64-7)),
     unsigned64_signed64(LoUn, Lo).
 
-%% uuid_atom(-UUID, +Atom) is det
-%% uuid_atom(+UUID, -Atom) is det
-% Make the atom equal to the hexadecimal representation of the version-4 UUID
+%! uuid_atom(-UUID, +Atom) is semidet.
+%! uuid_atom(+UUID, -Atom) is det.
+% Atom is equal to the hexadecimal representation of the version-4 UUID
 uuid_atom(uuid(Hi_, Lo_), A) :-
     integer(Hi_), integer(Lo_), !,
     unsigned64_signed64(Hi, Hi_),
