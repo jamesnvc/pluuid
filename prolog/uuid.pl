@@ -1,4 +1,4 @@
-:- module(uuid, [random_uuid/1, uuid_atom/2]).
+:- module(uuid, [random_uuid/1, uuid_atom/2, uuid/1, uuid/2]).
 :- use_module(library(crypto), [crypto_n_random_bytes/2, hex_bytes/2]).
 :- use_module(library(list_util), [split/3]).
 
@@ -67,3 +67,26 @@ uuid_atom(uuid(Hi, Lo), A) :-
     Lo_ is ClockSeq << 48 + Node,
     unsigned64_signed64(Hi_, Hi),
     unsigned64_signed64(Lo_, Lo).
+
+%! uuid(-UUID) is det.
+% Create a new, random v4 UUID as the atom representation.
+% Copying the API of the built-in `library(uuid)`
+uuid(UUID) :-
+    random_uuid(U),
+    uuid_atom(U, UUID).
+
+%! uuid(-UUID, +Options) is det.
+% Copying the API of the built-in `library(uuid)`
+uuid(_UUID, Options) :-
+    member(version(V), Options),
+    V \= 4, !,
+    throw(error(domain_error(4, V),
+                context(uuid/2, 'Only version 4 UUIDs supported'))).
+uuid(UUID, Options) :-
+    memberchk(format(integer), Options), !,
+    random_uuid(uuid(SHi, SLo)),
+    unsigned64_signed64(Hi, SHi),
+    unsigned64_signed64(Lo, SLo),
+    UUID is Hi << 64 + Lo.
+uuid(UUID, _Options) :-
+    uuid(UUID).
