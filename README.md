@@ -6,7 +6,7 @@ There is supposed to be [a `uuid` library already provided](http://www.swi-prolo
 Also, because the [initial purpose](https://github.com/braidchat/schedulebot) of this library is to communicate via Transit, I wanted the canonical representation of the UUIDs to be two 64-bit signed integers (as that's how they're represented in Transit+MsgPack, which is what Braid uses).
 If neither of those things are important to you, you may as well use the one that comes with SWI-Prolog.
 
-It can be installed in SWI-Prolog using `pack_install(uuid).`
+It can be installed in SWI-Prolog using `pack_install(pluuid).`
 
 ## Examples
 
