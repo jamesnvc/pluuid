@@ -1,4 +1,4 @@
-:- module(uuid, [random_uuid/1, uuid_atom/2, uuid/1, uuid/2]).
+:- module(pluuid, [random_uuid/1, uuid_atom/2, uuid/1, uuid/2]).
 :- use_module(library(crypto), [crypto_n_random_bytes/2, hex_bytes/2]).
 :- use_module(library(list_util), [split/3]).
 
